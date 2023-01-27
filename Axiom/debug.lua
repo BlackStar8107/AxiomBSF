@@ -16,10 +16,10 @@ local function exists(file)
   return fs.exists(file)
 end
 
-if not exists("Star OS") or not exists("Star OS/libraries") then
-  printFSwarning("Star OS")
+if not exists("Star_OS") or not exists("Star_OS/libraries") then
+  printFSwarning("Star_OS")
 else
-  local setting = require("Star OS/libraries/setting")
+  local setting = require("Star_OS/libraries/setting")
   if #tArgs == 0 then
     printUsage()
   else
