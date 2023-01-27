@@ -1,6 +1,8 @@
-# axiom
+# AxiomBSF
 
 Axiom is an operating system/UI thing for ComputerCraft 1.7+
+
+This is a personal Fork of Axiom.
 
 Features Include:
  - An advanced user interface
@@ -12,4 +14,4 @@ Features Include:
  - A boatload of settings
  - And more!
 
-This version is community driven and partially independent to the original version.
+This version is community driven and independent of the original version.
