@@ -37,7 +37,7 @@
       lastlogin = "Never",
       system_skip_error = false,
       password = "good luck getting in here",
-      image_dir = "Axiom/images/",
+      image_dir = "Star_OS/images/",
       allow_background_change = true,
     },
     ["GUEST"] = {
@@ -50,7 +50,7 @@
       lastlogin = "Never",
       system_skip_error = false,
       password = "5AEDA02C4E69EA884358A897F8359366628136AF821491ADB1CC806A0B1061D4",
-      image_dir = "Axiom/images/",
+      image_dir = "Star_OS/images/",
       allow_background_change = true,
     },
 
