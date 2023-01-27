@@ -1,7 +1,7 @@
 --[[
 	STD Graphical User Interface! (STD-GUI)!
 	Made by LDDestroier/EldidiStroyrr (same guy)
-	Modified to be used in Axiom, specifically!
+	Modified to be used in Star_OS, specifically!
 --]]
 
 local tsv = term.current().setVisible --comment out if you are debugging
@@ -26,7 +26,7 @@ if type(std) ~= "table" then std = {} end
 
 local overrideNoOS = false --prevent SimSoft functions, even if it's installed
 local isSimSoft = false --special integration into SimSoft!
-local isAxiom = true --special integration into Axiom!
+local isStar_OS = true --special integration into Star_OS!
 std.channel = "STD"
 std.prevChannel = std.channel
 
@@ -146,8 +146,8 @@ std.stdList = "."..std.channel:lower().."_list"
 --I'm not in fucking SimSoft, look at the fucking URL you bungy fucking twatnose shitcunt
 --if (fs.isDir("SimSoft/Data") and fs.isDir("SimSoft/SappS")) and (not overrideNoOS) then --checks if SimSoft is installed
 --	isSimSoft = true
---elseif (fs.isDir("Axiom") and fs.exists("Axiom/sys.axs")) and (not overrideNoOS) then --checks if Axiom is installed
---	isAxiom = true
+--elseif (fs.isDir("Star_OS") and fs.exists("Star_OS/sys.axs")) and (not overrideNoOS) then --checks if Star_OS is installed
+--	isStar_OS = true
 --end
 
 local cprint = function(txt,y)
@@ -979,8 +979,8 @@ local renderStoreItem = function(obj) --now being experimented on...
 				term.write("(R)UN")
 			end
 			local txt
-			if isSimSoft or isAxiom then
-				if term.isColor() then --yeah yeah, simsoft can't run on normal computers, but axiom can, so shut your cunting trap
+			if isSimSoft or isStar_OS then
+				if term.isColor() then --yeah yeah, simsoft can't run on normal computers, but Star_OS can, so shut your cunting trap
 					term.setTextColor(palate.item.downloadtxt)
 					term.setBackgroundColor(palate.item.downloadbg)
 					txt = "INSTALL!"
@@ -1206,7 +1206,7 @@ local tArg = {...}
 if tArg[1] == "help" then
 	return displayHelp(true)
 elseif tArg[1] == "upgrade" then
-	local updateURL = "https://github.com/nothjarnan/axiom/raw/master/Axiom/programs/stdgui.app"
+	local updateURL = "https://github.com/nothjarnan/Star_OS/raw/master/Star_OS/programs/stdgui.app"
 	local res, outcome = getFile(shell.getRunningProgram(),updateURL)
 	if not res then
 		error(outcome)
@@ -1237,7 +1237,7 @@ local cleanExit = function()
 	else
 		out = "Thank you for using STD-GUI!"
 	end
-	if isSimSoft or isAxiom then
+	if isSimSoft or isStar_OS then
 		term.setCursorBlink(false)
 	end
 --	cprint(out,scr_y/2)
@@ -1254,10 +1254,10 @@ local STDdownloadPrompt = function(item)
 		end
 	end
 	local savepath
-	if isAxiom then
+	if isStar_OS then
 		if std.channel == "STD-Media" then
 			if (std.storeURLs[itname].catagory == 2) or (std.storeURLs[itname].catagory == 3) then --if nfp or nft
-				savepath = fs.combine("Axiom/images",itname)
+				savepath = fs.combine("Star_OS/images",itname)
 			else
 				savepath = fs.combine("home/".._G.currentUser,itname)
 			end
@@ -1265,7 +1265,7 @@ local STDdownloadPrompt = function(item)
 			if std.storeURLs[itname].catagory == 8 then --if an API
 				savepath = fs.combine("/home/APIs",itname)
 			else
-				savepath = fs.combine("/Axiom/programs",itname)..".app"
+				savepath = fs.combine("/Star_OS/programs",itname)..".app"
 			end
 		end
 	else
@@ -1305,7 +1305,7 @@ local STDdownloadPrompt = function(item)
 			term.write(outcome)
 			sleep(0.6)
 		else
-			if isAxiom then
+			if isStar_OS then
 				if (std.storeURLs[itname].catagory ~= 8) and (std.channel ~= "STD-Media") then --no need for an icon for an api, wouldn't you say
 					local file = fs.open( fs.combine("home/".._G.currentUser.."/Desktop",itname)..".lnk" , "w")
 					file.write(savepath)
@@ -1509,8 +1509,8 @@ local doEverything = function() --do I have to do EVERYTHING?
 							sleep(0)
 							if isSimSoft then
 								SimSoftDownloadPrompt(yposes[y])
-							elseif isAxiom then
-								STDdownloadPrompt(yposes[y]) --axiom only changes the
+							elseif isStar_OS then
+								STDdownloadPrompt(yposes[y]) --Star_OS only changes the
 							end
 							--break
 						end
@@ -1625,7 +1625,7 @@ local doEverything = function() --do I have to do EVERYTHING?
 				pleaseWait()
 				std.getSTDList(std.prevChannel)
 			elseif (evt[2] == keys.f12) and (not isSimSoft) then
-				local updateURL = "https://github.com/nothjarnan/axiom/raw/master/Axiom/programs/stdgui.app"
+				local updateURL = "https://github.com/nothjarnan/Star_OS/raw/master/Star_OS/programs/stdgui.app"
 				getFile(shell.getRunningProgram(),updateURL)
 				local flashes = {
 					colors.black,

@@ -6,7 +6,7 @@ term.setCursorPos(1, 1)
 local scr_x, scr_y = term.getSize() --initial screen size
 
 if turtle then
-  error("Axiom cannot be run on a turtle, silly.")
+  error("Star OS cannot be run on a turtle, silly.")
 end
 --local ip = http.get("http://ipecho.net/plain")
 local ip_processed = nil
@@ -115,9 +115,9 @@ local tArgs = {...}
 --oldPullEvent = os.pullEvent
 os.pullEvent = os.pullEventRaw
 if pocket then
-  if fs.exists("Axiom/sys-pocket.axs") then
+  if fs.exists("Star_OS/sys-pocket.axs") then
     fs.delete("startup")
-    shell.run("Axiom/sys-pocket.axs")
+    shell.run("Star_OS/sys-pocket.axs")
   end
 end
 
@@ -158,16 +158,16 @@ alerts = {
 -- For making sure the files are A-OK
 local allfiles = { -- Protected files as well
   "startup",
-  "Axiom/sys.lua",
-  "Axiom/images/default.nfp",
-  "Axiom/images/AX.nfp",
-  "Axiom/images/axiom.nfp",
-  "Axiom/images/nature.nfp",
-  "Axiom/libraries/setting",
-  "Axiom/libraries/edge",
-  "Axiom/libraries/encryption",
-  "Axiom/settings.bak",
-  "Axiom/libraries/button",
+  "Star_OS/sys.lua",
+  "Star_OS/images/default.nfp",
+  "Star_OS/images/AX.nfp",
+  "Star_OS/images/Star OS.nfp",
+  "Star_OS/images/nature.nfp",
+  "Star_OS/libraries/setting",
+  "Star_OS/libraries/edge",
+  "Star_OS/libraries/encryption",
+  "Star_OS/settings.bak",
+  "Star_OS/libraries/button",
 }
 
 events = true
@@ -178,7 +178,7 @@ updating = false
 -- GLOBALS
 
 _G.currentUser = "KERNEL"
-_G.productName = "Axiom UI"
+_G.productName = "Star_OS UI"
 _G.version_sub = "branch:experimental"
 _G.version = "5.2"
 _G.hasRootAccess = false
@@ -280,7 +280,7 @@ function errorHandler(err)
 
   term.clear()
   print("Well, this is embarrassing.")
-  print("Looks like Axiom crashed. Here's some useful information to provide the debugging monkey team:")
+  print("Looks like Star OS crashed. Here's some useful information to provide the debugging monkey team:")
   print(err)
   print(productName.." "..version.." "..version_sub)
   print(_G.currentUser)
@@ -288,7 +288,7 @@ function errorHandler(err)
 end
 
 function checkForUpdates()
-  local result = http.get("http://nothy.se/axiom/latest")
+  local result = http.get("http://nothy.se/Star OS/latest")
   _G.latestversion = result.readAll()
   if _G.latestversion ~= nil and _G.latestversion == version then
     return false
@@ -319,9 +319,9 @@ function keyStrokeHandler()
       --print(keystrokes[#keystrokes-2], keystrokes[#keystrokes-1], keystrokes[#keystrokes], isHeld)
       if keystrokes[#keystrokes-1] == 42 and keystrokes[#keystrokes] == 32 and isHeld then
         if _G.currentUser ~= nil then
-          if fs.exists("Axiom/programs/store.app") and invalidInstallation == false then
+          if fs.exists("Star_OS/programs/store.app") and invalidInstallation == false then
 
-            shell.run("Axiom/programs/store.app")
+            shell.run("Star_OS/programs/store.app")
           end
         end
       end
@@ -330,8 +330,8 @@ function keyStrokeHandler()
 
       end
       if keystrokes[#keystrokes-1] == 42 and keystrokes[#keystrokes] == 33 and isHeld then
-        if fs.exists("Axiom/programs/explorer.app") and invalidInstallation == false then
-          shell.run("Axiom/programs/explorer.app")
+        if fs.exists("Star_OS/programs/explorer.app") and invalidInstallation == false then
+          shell.run("Star_OS/programs/explorer.app")
         end
         --filebrowser("/")
 
@@ -348,7 +348,7 @@ function keyStrokeHandler()
       end
     end
   end
-  axiom.alert("keyStrokeHandler killed", 3)
+  Star_OS.alert("keyStrokeHandler killed", 3)
 end
 function clock()
 
@@ -395,7 +395,7 @@ function download(url, file, logOutput)
       speaker.playNote("harp", 1, 1)
     end
     edge.render(16, 7, 34, 12, colors.white, colors.cyan, "", colors.black, true)
-    --edge.render(17, 8, 34, 8, colors.white, colors.cyan, "Welcome to Axiom!", colors.black, false)
+    --edge.render(17, 8, 34, 8, colors.white, colors.cyan, "Welcome to Star OS!", colors.black, false)
     edge.render(17, 9, 34, 9, colors.white, colors.cyan, " (!) Fatal error", colors.red, false)
     edge.render(16, 10, 34, 10, colors.white, colors.cyan, "HTTP_DISABLED", colors.orange, false)
     return false
@@ -453,7 +453,7 @@ end
 function execUpd(isTerminal)
   --local out = false
   --local success = false
-  --setting.setVariable("Axiom/settings.bak", "system_last_update", "Day "..os.day().." @ "..edge.c())
+  --setting.setVariable("Star OS/settings.bak", "system_last_update", "Day "..os.day().." @ "..edge.c())
 
   --if not success and isTerminal then write("Update not set up yet.\n") end
   --if speakerPresent then
@@ -463,7 +463,7 @@ function execUpd(isTerminal)
   --return success, "Update system not finished for Community version. Use gitget to update."
   local out = true
   local success = true
-  shell.run("/.gitget "..setting.variables.update.user.." axiom "..setting.variables.update.branch.." /")
+  shell.run("/.gitget "..setting.variables.update.user.." Star OS "..setting.variables.update.branch.." /")
   return success, "Updated with gitget."
 end
 function login_clock()
@@ -532,9 +532,9 @@ function login_gui_unreleased()
   end
   term.setTextColor(colors.white)
   if userButtons[_G.currentUser] == nil then
-    if fs.exists("Axiom/.fs") then
-      fs.delete("Axiom/.fs")
-      edge.windowAlert(20, 10, "An unexpected error has occurred and Axiom has to reboot. You will be taken through first time setup.", true, colors.red)
+    if fs.exists("Star_OS/.fs") then
+      fs.delete("Star_OS/.fs")
+      edge.windowAlert(20, 10, "An unexpected error has occurred and Star OS has to reboot. You will be taken through first time setup.", true, colors.red)
       os.reboot()
     end
   end
@@ -577,7 +577,7 @@ function login_gui_unreleased()
           state = "login_gui"
           if setting.variables.users[_G.currentUser].password == pw and attempt <= 3  then
             state = "desktop"
-            axiom.setCurrentUser(setting.variables.users[_G.currentUser].displayName)
+            Star_OS.setCurrentUser(setting.variables.users[_G.currentUser].displayName)
             desktop()
           else
             attempt = attempt + 1
@@ -595,7 +595,7 @@ function login_gui_unreleased()
           end
         else
           state = "desktop"
-          axiom.setCurrentUser(setting.variables.users[_G.currentUser].displayName)
+          Star_OS.setCurrentUser(setting.variables.users[_G.currentUser].displayName)
           desktop()
         end
       end
@@ -826,7 +826,7 @@ function terminal(dir)
   if _G.currentUser == "GUEST" then return false end
   state = "terminal"
   if not setting then
-    os.loadAPI("Axiom/libraries/setting ")
+    os.loadAPI("Star_OS/libraries/setting ")
   end
   if not term.isColor() then
     errorcolor = colors.lightGray
@@ -852,11 +852,11 @@ function terminal(dir)
     edge.render(1, 1, scr_x, scr_y, colors.black, colors.black, "", colors.white, false)
   end
   term.setCursorPos(1, 1)
-  write("Axiom Terminal "..terminalVersion.."\n")
+  write("Star OS Terminal "..terminalVersion.."\n")
   while(terminalActive) do
     term.setBackgroundColor(colors.black)
     term.setTextColor(nameColor)
-    write(curUser.."@axiom")
+    write(curUser.."@Star OS")
     term.setTextColor(tildeColor)
     write(" ~")
     term.setTextColor(dircolor)
@@ -947,11 +947,11 @@ function command(cmd)
       if edge.windowAlert(22, 9, "Are you sure?", false, colors.orange) then
         write("Uninstalling. \n")
         fs.delete("startup")
-        fs.delete("/Axiom/libraries")
-        fs.delete("/Axiom/images")
-        fs.delete("/Axiom/sys.lua")
-        fs.delete("/Axiom/settings.bak")
-        fs.delete("/Axiom/logging")
+        fs.delete("/Star_OS/libraries")
+        fs.delete("/Star_OS/images")
+        fs.delete("/Star_OS/sys.lua")
+        fs.delete("/Star_OS/settings.bak")
+        fs.delete("/Star_OS/logging")
         fs.delete("/home")
         fs.delete("/users")
         write("Uninstall complete. Rebooting.\n")
@@ -966,9 +966,9 @@ function command(cmd)
   end
   if cmdTable[1] == "testalert" then
     if cmdTable[2] ~= nil then
-      axiom.alert(cmdTable[2], 0)
+      Star_OS.alert(cmdTable[2], 0)
     else
-      axiom.alert("Alert test.", 0)
+      Star_OS.alert("Alert test.", 0)
     end
   end
   if cmdTable[1] == "version" then
@@ -1231,7 +1231,7 @@ function desktop()
     local x_p = 4
     --edge.render(1, 1, mx, scr_y, colors.cyan, colors.cyan, "", colors.black, false)
     edge.render(1, 1, mx, 1, menubarColor, colors.cyan, " o*", colors.gray, false)
-    edge.render(mx-string.len(axiom.getCurrentUser())-1, 1, mx, 1, menubarColor, colors.cyan, axiom.getCurrentUser(), colors.gray)
+    edge.render(mx-string.len(Star_OS.getCurrentUser())-1, 1, mx, 1, menubarColor, colors.cyan, Star_OS.getCurrentUser(), colors.gray)
 
 
     x_p = 4
@@ -1377,7 +1377,7 @@ function desktop()
     --   if string.len(v) > 6 then
     --     substring = string.sub(v, 7)
     --     filename = string.gsub(v, substring, "..")
-    --     --axiom.alert(filename)
+    --     --Star OS.alert(filename)
     --   else
     --     filename = v
     --   end
@@ -1436,8 +1436,8 @@ function desktop()
           -- Do stuff
           local ext = string.sub(v.opens, string.len(v.opens)-3)
           if ext == ".nfp" or ext == ".blt" or ext == ".nft" then
-            if fs.exists("Axiom/programs/pain.app") and invalidInstallation == false then
-              shell.run("Axiom/programs/pain.app "..v.opens)
+            if fs.exists("Star_OS/programs/pain.app") and invalidInstallation == false then
+              shell.run("Star_OS/programs/pain.app "..v.opens)
             else
               shell.run("paint "..v.opens)
             end
@@ -1460,7 +1460,7 @@ function desktop()
 
             shell.run(v.opens)
           elseif v.isfolder then
-            shell.run("Axiom/programs/explorer.app "..v.opens)
+            shell.run("Star_OS/programs/explorer.app "..v.opens)
           end
           desktop()
         end
@@ -1522,15 +1522,15 @@ function desktop()
             end
           end
           if x >= 1 and x <= mWidth and y == 4 then
-            --next.newTask("Axiom/Store/settings")
-            if fs.exists("Axiom/programs/settings.app") and invalidInstallation == false then
-              shell.run("Axiom/programs/settings.app")
+            --next.newTask("Star OS/Store/settings")
+            if fs.exists("Star_OS/programs/settings.app") and invalidInstallation == false then
+              shell.run("Star_OS/programs/settings.app")
               if os.version == "CraftOS 1.8" then
-                setting.loadsettings("Axiom/settings.bak")
+                setting.loadsettings("Star_OS/settings.bak")
               end
               desktop()
             else
-              edge.windowAlert(20, 8, "Axiom/programs/settings.app is unavailable", true, colors.red)
+              edge.windowAlert(20, 8, "Star_OS/programs/settings.app is unavailable", true, colors.red)
               desktop()
             end
           end
@@ -1540,11 +1540,11 @@ function desktop()
           end
           if x >= 1 and x <= mWidth and y == 5 then
             files = setting.variables.users[_G.currentUser].fexplore_startdir
-            if fs.exists("Axiom/programs/explorer.app") and invalidInstallation == false then
-              shell.run("Axiom/programs/explorer.app")
+            if fs.exists("Star_OS/programs/explorer.app") and invalidInstallation == false then
+              shell.run("Star_OS/programs/explorer.app")
               desktop()
             else
-              edge.windowAlert(20, 8, "Axiom/programs/explorer.app is unavailable", true, colors.red)
+              edge.windowAlert(20, 8, "Star_OS/programs/explorer.app is unavailable", true, colors.red)
               desktop()
             end
 
@@ -1571,10 +1571,10 @@ function desktop()
             os.reboot()
           end
           if x >= 1 and x <= mWidth and y == 10 then
-            if fs.exists("Axiom/programs/store.app") and invalidInstallation == false then
-              shell.run("Axiom/programs/store.app")
+            if fs.exists("Star_OS/programs/store.app") and invalidInstallation == false then
+              shell.run("Star_OS/programs/store.app")
             else
-              edge.windowAlert(20, 8, "Axiom/programs/store.app is unavailable", true, colors.red)
+              edge.windowAlert(20, 8, "Star_OS/programs/store.app is unavailable", true, colors.red)
               desktop()
             end
 
@@ -1609,7 +1609,7 @@ function ftsRender(step, usr, pw, l, adduser)
   if not adduser then adduser = false end
   local a, b = term.getSize()
   if step == 1 then
-    local olicense = "Axiom UI Community\n  Open Source software, you can freely modify to   your desires.\n  If you want to make some permanent changes to   Axiom UI Community, please make a pull request in \n  axiom-opensource.\n   Redistribution disallowed.\n  (C) Linus Ramneborg 2018"
+    local olicense = "Star OS UI Community\n  Open Source software, you can freely modify to   your desires.\n  If you want to make some permanent changes to   Star OS UI Community, please make a pull request in \n  Star OS-opensource.\n   Redistribution disallowed.\n  (C) Linus Ramneborg 2018"
     if olicense then
       edge.render(3, 5, 3, 5, colors.white, colors.cyan, olicense, colors.lightGray)
     else
@@ -1648,7 +1648,7 @@ function ftsRender(step, usr, pw, l, adduser)
     edge.render(a-string.len("Next >> "), 2, a, 2, colors.lime, colors.cyan, "Next x ", colors.white)
     edge.render(1, 4, a, b, colors.white, colors.cyan, "", colors.white)
     if not adduser then
-      edge.render((a/2)-(string.len("Welcome to Axiom")/2), (b/2), (a/2)-(string.len("Welcome to Axiom")/2), (b/2), colors.white, colors.cyan, "Welcome to Axiom.", colors.gray)
+      edge.render((a/2)-(string.len("Welcome to Star OS")/2), (b/2), (a/2)-(string.len("Welcome to Star OS")/2), (b/2), colors.white, colors.cyan, "Welcome to Star OS.", colors.gray)
       edge.render((a/2)-(string.len("Let's go!")/2), (b/2)+1, (a/2)-(string.len("Let's go!")/2), (b/2)+1, colors.white, colors.cyan, "Let's go!", colors.gray)
       edge.render(1, b-1, 1, b-1, colors.white, colors.cyan, "Rebooting...", colors.lightGray)
     end
@@ -1661,7 +1661,7 @@ function ftsRender(step, usr, pw, l, adduser)
       setting.addUser(usr, encryption.sha256(pw.."QxLUF1bgIAdeQX"), usr, true)
     end
     setting.variables.temp.first_start = false
-    fs.makeDir("Axiom/.fs")
+    fs.makeDir("Star_OS/.fs")
     setting.writesettings()
     sleep(1)
     if not adduser then
@@ -1669,19 +1669,19 @@ function ftsRender(step, usr, pw, l, adduser)
         edge.render(1, b-1, 1, b-1, colors.white, colors.cyan, "Creating additional desktop icons.. 1/3", colors.lightGray)
         local fh = fs.open("home/"..usr.."/Desktop/files.lnk", "w")
         if fh then
-          fh.write("Axiom/programs/explorer.app")
+          fh.write("Star_OS/programs/explorer.app")
           fh.close()
         end
         edge.render(1, b-1, 1, b-1, colors.white, colors.cyan, "Creating additional desktop icons.. 2/3", colors.lightGray)
         local fh2 = fs.open("home/"..usr.."/Desktop/settings.lnk", "w")
         if fh2 then
-          fh2.write("Axiom/programs/settings.app")
+          fh2.write("Star_OS/programs/settings.app")
           fh2.close()
         end
         edge.render(1, b-1, 1, b-1, colors.white, colors.cyan, "Creating additional desktop icons.. 3/3", colors.lightGray)
         local fh2 = fs.open("home/"..usr.."/Desktop/store.lnk", "w")
         if fh2 then
-          fh2.write("Axiom/programs/stdgui.app")
+          fh2.write("Star_OS/programs/stdgui.app")
           fh2.close()
         end
         edge.render(1, b-1, 1, b-1, colors.white, colors.cyan, "Creating additional desktop icons.. OK ", colors.lightGray)
@@ -1739,13 +1739,13 @@ function firstTimeSetupNew(adduser)
     end
     if x >= a-string.len("Next >> ") and x <= a and y == 2 then
       if step == 2 and #username >= 1 then
-        setting.setVariable("Axiom/settings.bak", "username", encryption.sha256(username.."QxLUF1bgIAdeQX"))
+        setting.setVariable("Star_OS/settings.bak", "username", encryption.sha256(username.."QxLUF1bgIAdeQX"))
       end
       if step == 3 then
-        setting.setVariable("Axiom/settings.bak", "password", encryption.sha256(password.."QxLUF1bgIAdeQX"))
+        setting.setVariable("Star_OS/settings.bak", "password", encryption.sha256(password.."QxLUF1bgIAdeQX"))
       end
       if licensed == true then
-        setting.setVariable("Axiom/settings.bak", "licensed", "true")
+        setting.setVariable("Star_OS/settings.bak", "licensed", "true")
       end
       if (step >= 1) and licensed and ((#username >= 1) or (step ~= 2))  then
         step = step + 1
@@ -1765,9 +1765,9 @@ function firstTimeSetupNew(adduser)
       end
       if not adduser then
         if unreleased then
-          os.setComputerLabel("Axiom "..version.." "..version_sub)
+          os.setComputerLabel("Star OS "..version.." "..version_sub)
         else
-          os.setComputerLabel("Axiom "..version.." "..version_sub)
+          os.setComputerLabel("Star OS "..version.." "..version_sub)
         end
       end
 
@@ -1790,18 +1790,18 @@ function firstTimeSetupNew(adduser)
 end
 function initialize()
 
-  setting.loadsettings("Axiom/settings.bak")
-  if not fs.exists("Axiom/settings.bak") then
-    axiom.alert("FATAL ERROR, SETTINGS FILE NOT FOUND.", 3)
-    return false, "axiom/settings.bak could not be found."
+  setting.loadsettings("Star_OS/settings.bak")
+  if not fs.exists("Star_OS/settings.bak") then
+    Star_OS.alert("FATAL ERROR, SETTINGS FILE NOT FOUND.", 3)
+    return false, "Star_OS/settings.bak could not be found."
   end
 
-  if not fs.exists("Axiom/.fs") then
+  if not fs.exists("Star_OS/.fs") then
 
     setting.variables.temp.installDate = os.day()
     setting.variables.temp.systemID = os.getComputerID()
     setting.variables.temp.first_start = false
-    fs.makeDir("Axiom/.fs")
+    fs.makeDir("Star_OS/.fs")
       --local h = http.post("http://nothy.000webhostapp.com/bugreport.php", "uid="..textutils.urlEncode(tostring(setting.variables.temp.debugID)).."&brep="..textutils.urlEncode(tostring("First run on "..version.."<br><b>installed on "..os.day().."</b>")))
     setting.writesettings()
     firstTimeSetupNew()
@@ -1857,7 +1857,7 @@ function boot()
   if dangerousStatus then
     bgCol = colors.orange
   end
-  if not fs.exists("Axiom/libraries/edge") then
+  if not fs.exists("Star_OS/libraries/edge") then
     term.setTextColor(colors.white)
     term.setBackgroundColor(colors.black)
     print("ERROR: Edge Graphics not found. Are you sure you have installed "..productName.." properly?")
@@ -1869,7 +1869,7 @@ function boot()
     i = io.read()
     if string.lower(i) == "y" then
       print("Installing Edge Graphics.")
-      noapidl("https://www.dropbox.com/s/a5kxzjl6122uti2/edge?dl=1", "Axiom/libraries/edge")
+      noapidl("https://www.dropbox.com/s/a5kxzjl6122uti2/edge?dl=1", "Star_OS/libraries/edge")
     else
       print("OK")
     end
@@ -1878,7 +1878,7 @@ function boot()
     error("Invalid session: cannot be run as startup")
   end
   --print("edge")
-  os.loadAPI("Axiom/libraries/edge")
+  os.loadAPI("Star_OS/libraries/edge")
 
   --print("setting")
   if monitor then
@@ -1890,13 +1890,13 @@ function boot()
       printerr("Monitor not present or disconnected")
     end
   end
-  os.loadAPI("Axiom/libraries/setting")
+  os.loadAPI("Star_OS/libraries/setting")
   --print("encryption")
-  os.loadAPI("Axiom/libraries/encryption")
+  os.loadAPI("Star_OS/libraries/encryption")
   --print("loaded apis")
-  os.loadAPI("Axiom/libraries/net")
-  os.loadAPI("Axiom/libraries/json")
-  os.loadAPI("Axiom/libraries/axiom")
+  os.loadAPI("Star_OS/libraries/net")
+  os.loadAPI("Star_OS/libraries/json")
+  os.loadAPI("Star_OS/libraries/Star_OS")
   if not edge then error("Edge is not loaded.") end
   local mx, my = term.getSize()
 
@@ -1914,7 +1914,7 @@ function boot()
           "encryption",
           "fs",
           "setting",
-          "axiom",
+          "Star_OS",
           "net",
           "json"
         }
@@ -1960,21 +1960,21 @@ function boot()
   end
   setting.writesettings()
   if not edge then
-    error("Axiom did not load Edge properly.")
+    error("Star OS did not load Edge properly.")
   end
   if not setting then
-    error("Axiom did not load Settings API properly.")
+    error("Star OS did not load Settings API properly.")
   end
   if not next then
-    error("Axiom did not find Next API, which doesn't affect this OS what so ever since it's obsolete. Rendering this snippet of code absolutely useless.")
+    error("Star OS did not find Next API, which doesn't affect this OS what so ever since it's obsolete. Rendering this snippet of code absolutely useless.")
   end
 
   needsUpdate = checkForUpdates()
 
   if not setting.variables.temp.system_skipsys_scan then
-    if fs.exists("Axiom/log.txt") then
-      if fs.getSize("Axiom/log.txt") >= 12000 then
-        fs.delete("Axiom/log.txt")
+    if fs.exists("Star_OS/log.txt") then
+      if fs.getSize("Star_OS/log.txt") >= 12000 then
+        fs.delete("Star_OS/log.txt")
       end
     end
     local fileList = fs.list("/")
@@ -2076,13 +2076,13 @@ end
 
 function log(string)
   local time = os.clock()
-  if not fs.exists("Axiom/log.txt") then
-    logfile = fs.open("Axiom/log.txt", "w")
+  if not fs.exists("Star_OS/log.txt") then
+    logfile = fs.open("Star_OS/log.txt", "w")
     if logfile ~= nil then
       logfile.close()
     end
   end
-  logfile = fs.open("Axiom/log.txt", "a")
+  logfile = fs.open("Star_OS/log.txt", "a")
   if logfile ~= nil then
     logfile.writeLine("["..time.."]: "..string.."\n")
     logfile.close()
@@ -2105,9 +2105,9 @@ printout("SYSTEM: Starting services..")
 if fs.exists("safeStart") then
   if fs.exists("limbo") then
     hasRootAccess = true
-    for k, v in ipairs(fs.list("Axiom/libraries")) do
+    for k, v in ipairs(fs.list("Star_OS/libraries")) do
       if v ~= "button" then
-        os.loadAPI("Axiom/libraries/"..v)
+        os.loadAPI("Star_OS/libraries/"..v)
         printout("Loaded "..v)
       else
         printerr("Ignored "..v)
@@ -2143,27 +2143,27 @@ if os.version() ~= "CraftOS 1.8" then
   printwarn("If you are using CC 1.7x you can ignore this message.")
   sleep(1)
 end
-if fs.exists("Axiom/settings.0") == true and fs.exists("Axiom/settings.bak") == false then
-  fs.copy("Axiom/settings.0", "Axiom/settings.bak")
+if fs.exists("Star_OS/settings.0") == true and fs.exists("Star_OS/settings.bak") == false then
+  fs.copy("Star_OS/settings.0", "Star_OS/settings.bak")
   printout("Settings file has been copied from backup.")
 end
-if not fs.exists("Axiom/settings.bak") then
+if not fs.exists("Star_OS/settings.bak") then
   term.setTextColor(colors.white)
   term.setBackgroundColor(colors.black)
-  if fs.exists("Axiom/backup/os/settings.bak") then
-    fs.copy("Axiom/backup/os/settings.bak", "Axiom/settings.bak")
+  if fs.exists("Star_OS/backup/os/settings.bak") then
+    fs.copy("Star_OS/backup/os/settings.bak", "Star_OS/settings.bak")
     printout("Restored settings from backup.")
   else
     printerr("Settings file is missing or corrupt. System will reboot when repair is finished.")
-    noapidl("https://www.dropbox.com/s/ynyrs22t1hh2mry/settings?dl=1", "Axiom/settings.bak")
+    noapidl("https://www.dropbox.com/s/ynyrs22t1hh2mry/settings?dl=1", "Star_OS/settings.bak")
     printout("Repair finished. Rebooting into first time setup.")
     sleep(5)
     os.reboot()
   end
 end
-if fs.exists("Axiom/settings") == true and fs.exists("Axiom/settings.bak") == false then
-  fs.copy("Axiom/settings", "Axiom/settings.bak")
-  fs.delete("Axiom/settings")
+if fs.exists("Star_OS/settings") == true and fs.exists("Star_OS/settings.bak") == false then
+  fs.copy("Star_OS/settings", "Star_OS/settings.bak")
+  fs.delete("Star_OS/settings")
   printout("Settings file has been updated to support "..version)
   sleep(1)
 end

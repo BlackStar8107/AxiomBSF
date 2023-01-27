@@ -16,14 +16,14 @@ local function exists(file)
   return fs.exists(file)
 end
 
-if not exists("Axiom") or not exists("Axiom/libraries") then
-  printFSwarning("Axiom")
+if not exists("Star OS") or not exists("Star OS/libraries") then
+  printFSwarning("Star OS")
 else
-  local setting = require("Axiom/libraries/setting")
+  local setting = require("Star OS/libraries/setting")
   if #tArgs == 0 then
     printUsage()
   else
     -- something something commands yadda  yadda yadda
-    
+
   end
 end

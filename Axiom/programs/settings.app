@@ -12,14 +12,14 @@ local selectedScale = edge.getScaleIndex()
 local selectedScale_emu = 4
 -- if os.version() == "CraftOS 1.8" and not setting then
 --   appversion = appversion.." (CC 1.8 mode)"
---   productName = "Axiom UI"
+--   productName = "Star_OS UI"
 --   version = "4.0"
 --   version_sub = "nightly "
 --
 --   apiErrors = {}
---   os.loadAPI("Axiom/libraries/setting")
+--   os.loadAPI("Star_OS/libraries/setting")
 --
---   setting.loadsettings("Axiom/settings.0")
+--   setting.loadsettings("Star_OS/settings.0")
 --   for k,v in pairs(setting.variables.users) do
 --     if k ~= "KERNEL" then
 --       currentUser = k
@@ -29,7 +29,7 @@ local selectedScale_emu = 4
 --   -- Forcibly load settings from file
 -- end
 local function filebrowser(files, select)
-	shell.run("Axiom/programs/explorer.app", files, select and "select" or nil)
+	shell.run("Star_OS/programs/explorer.app", files, select and "select" or nil)
 end
 function ftsRender(step,usr,pw,l,adduser)
   if not adduser then adduser = false end
@@ -74,7 +74,7 @@ function ftsRender(step,usr,pw,l,adduser)
     edge.render(a-string.len("Next >> "),2,a,2,colors.lime,colors.cyan,"Next x ",colors.white)
     edge.render(1,4,a,b,colors.white,colors.cyan,"",colors.white)
     if not adduser then
-      edge.render((a/2)-(string.len("Welcome to Axiom")/2),(b/2),(a/2)-(string.len("Welcome to Axiom")/2),(b/2),colors.white,colors.cyan,"Welcome to Axiom.",colors.gray)
+      edge.render((a/2)-(string.len("Welcome to Star_OS")/2),(b/2),(a/2)-(string.len("Welcome to Star_OS")/2),(b/2),colors.white,colors.cyan,"Welcome to Star_OS.",colors.gray)
       edge.render((a/2)-(string.len("Let's go!")/2),(b/2)+1,(a/2)-(string.len("Let's go!")/2),(b/2)+1,colors.white,colors.cyan,"Let's go!",colors.gray)
       edge.render(1,b-1,1,b-1,colors.white,colors.cyan,"Rebooting...",colors.lightGray)
     end
@@ -92,15 +92,15 @@ function ftsRender(step,usr,pw,l,adduser)
       if not fs.exists("home/Desktop/files.lnk") then
         edge.render(1,b-1,1,b-1,colors.white,colors.cyan,"Creating additional desktop icons.. 1/3",colors.lightGray)
         local fh = fs.open("home/Desktop/files.lnk","w")
-        fh.write("Axiom/programs/explorer.app")
+        fh.write("Star_OS/programs/explorer.app")
         fh.close()
         edge.render(1,b-1,1,b-1,colors.white,colors.cyan,"Creating additional desktop icons.. 2/3",colors.lightGray)
         local fh2 = fs.open("home/Desktop/settings.lnk","w")
-        fh2.write("Axiom/programs/settings.app")
+        fh2.write("Star_OS/programs/settings.app")
         fh2.close()
         edge.render(1,b-1,1,b-1,colors.white,colors.cyan,"Creating additional desktop icons.. 3/3",colors.lightGray)
         local fh2 = fs.open("home/Desktop/store.lnk","w")
-        fh2.write("Axiom/programs/stdgui.app")
+        fh2.write("Star_OS/programs/stdgui.app")
         fh2.close()
         edge.render(1,b-1,1,b-1,colors.white,colors.cyan,"Creating additional desktop icons.. OK ",colors.lightGray)
         sleep(1)
@@ -119,7 +119,7 @@ function writesettings()
   local vars = setting.variables
   --print(textutils.serialise(vars))
   local s = textutils.serialise(vars)
-  local fh = fs.open("Axiom/settings.bak","w")
+  local fh = fs.open("Star_OS/settings.bak","w")
   fh.write(s)
   fh.close()
 end
@@ -168,13 +168,13 @@ function firstTimeSetupNew(adduser)
     end
     if x >= a-string.len("Next >> ") and x <= a and y == 2 then
       if step == 2 then
-        setting.setVariable("Axiom/settings.0","username",encryption.sha256(username.."QxLUF1bgIAdeQX"))
+        setting.setVariable("Star_OS/settings.0","username",encryption.sha256(username.."QxLUF1bgIAdeQX"))
       end
       if step == 3 then
-        setting.setVariable("Axiom/settings.0","password",encryption.sha256(password.."QxLUF1bgIAdeQX"))
+        setting.setVariable("Star_OS/settings.0","password",encryption.sha256(password.."QxLUF1bgIAdeQX"))
       end
       if licensed == true then
-        setting.setVariable("Axiom/settings.0","licensed","true")
+        setting.setVariable("Star_OS/settings.0","licensed","true")
       end
       if step >= 1 and licensed == true then
         step = step + 1
@@ -206,9 +206,9 @@ function firstTimeSetupNew(adduser)
       end
       if not adduser then
         if unreleased then
-          os.setComputerLabel("Axiom "..version.." "..version_sub)
+          os.setComputerLabel("Star_OS "..version.." "..version_sub)
         else
-          os.setComputerLabel("Axiom PC: "..username)
+          os.setComputerLabel("Star_OS PC: "..username)
         end
       end
 
@@ -730,7 +730,7 @@ function settings_new(startpage)
           --edge.render(1,2,mx,my,colors.white,colors.cyan,"",colors.black)
           edge.render(1,2,mx,4,colors.lime,colors.cyan,"",colors.black)
           edge.render(mx-2,2,mx-2,2,colors.lime,colors.cyan,"x",colors.red)
-          setting.variables = setting.loadsettings("Axiom/settings.bak")
+          setting.variables = setting.loadsettings("Star_OS/settings.bak")
           settings_draw(currentpage)
         end
 
@@ -769,7 +769,7 @@ function settings_new(startpage)
                     edge.render(44,users[k].by+1,49,users[k].by+1,colors.red,colors.cyan,"DELETED",colors.white)
                     setting.deleteUser(v.uname)
                     local ok = edge.windowAlert(20,10,"A reboot may be required to apply these changes.",true,colors.orange)
-                    setting.variables = setting.loadsettings("Axiom/settings.bak")
+                    setting.variables = setting.loadsettings("Star_OS/settings.bak")
                     settings_draw(currentpage)
                     -- if not ok then
                     --   sleep(0.2)
@@ -983,17 +983,17 @@ function settings_new(startpage)
       end
     --  write(x..","..y)
       -- if x >= 2 and x <= 24 and y == bg_y+8 then
-      --   axiom.alert("debug "..tostring(edge.getOverlay()))
+      --   Star_OS.alert("debug "..tostring(edge.getOverlay()))
       --   if edge.toggleOverlay() then
       --
       --     edge.render(2,bg_y+8,24,bg_y+8,colors.green,colors.cyan,"Debug overlay enabled",colors.white,false)
       --     edge.debugSay("Enabled debug")
       --   else
-      --     axiom.alert("debug "..tostring(edge.getOverlay()))
+      --     Star_OS.alert("debug "..tostring(edge.getOverlay()))
       --     edge.render(2,bg_y+8,24,bg_y+8,colors.red,colors.cyan,"Debug overlay disabled",colors.white,false)
       --     edge.debugSay("Disabled debug")
       --   end
-      --   --axiom.alert("debug "..tostring(edge.getOverlay()))
+      --   --Star_OS.alert("debug "..tostring(edge.getOverlay()))
       --   -- if edge.getOverlay() == true then
       --   --   edge.render(2,bg_y+4,24,bg_y+4,colors.green,colors.cyan,"Debug enabled",colors.white,false)
       --   --   edge.debugSay("Enabled debug")

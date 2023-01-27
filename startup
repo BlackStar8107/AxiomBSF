@@ -1,5 +1,5 @@
-if fs.exists("Axiom/sys.lua") then
-  shell.run("Axiom/sys.lua")
+if fs.exists("Star_OS/sys.lua") then
+  shell.run("Star_OS/sys.lua")
 else
-  error("Axiom could not be started")
+  error("Star OS could not be started")
 end

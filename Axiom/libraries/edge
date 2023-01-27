@@ -1,7 +1,7 @@
 alias="At least it works!"
 version = "Edge v3.28"
 noLog = false
-imageDir = "Axiom/images/"
+imageDir = "Star_OS/images/"
 defc = colors.white
 local ccversion = os.version()
 local easterEgg_allcaps = false
@@ -216,17 +216,17 @@ function log(string)
   end
   if noLog == false then
     local time = os.clock()
-    if fs.exists("Axiom/logging/system.log") then
-      if fs.getSize("Axiom/logging/system.log") >= 12000 then
-        fs.delete("Axiom/logging/system.log")
+    if fs.exists("Star_OS/logging/system.log") then
+      if fs.getSize("Star_OS/logging/system.log") >= 12000 then
+        fs.delete("Star_OS/logging/system.log")
         log(version.." | "..alias)
       end
     end
-    if not fs.exists("Axiom/logging/system.log") then
-      logfile = fs.open("Axiom/logging/system.log","w")
+    if not fs.exists("Star_OS/logging/system.log") then
+      logfile = fs.open("Star_OS/logging/system.log","w")
       logfile.close()
     end
-    logfile = fs.open("Axiom/logging/system.log","a")
+    logfile = fs.open("Star_OS/logging/system.log","a")
     logfile.writeLine("["..time.." / "..c().."]: "..string.."\n")
     logfile.flush()
     logfile.close()
@@ -244,16 +244,16 @@ end
 function llog(string)
   if noLog == false then
     local time = os.clock()
-    if fs.exists("Axiom/logging/edge.log") then
-      if fs.getSize("Axiom/logging/edge.log") >= 12000 then
-        fs.delete("Axiom/logging/edge.log")
+    if fs.exists("Star_OS/logging/edge.log") then
+      if fs.getSize("Star_OS/logging/edge.log") >= 12000 then
+        fs.delete("Star_OS/logging/edge.log")
       end
     end
-    if not fs.exists("Axiom/logging/edge.log") then
-      logfile = fs.open("Axiom/logging/edge.log","w")
+    if not fs.exists("Star_OS/logging/edge.log") then
+      logfile = fs.open("Star_OS/logging/edge.log","w")
       logfile.close()
     end
-    logfile = fs.open("Axiom/logging/edge.log","a")
+    logfile = fs.open("Star_OS/logging/edge.log","a")
     logfile.writeLine("["..time.." / "..c().."]: "..string.."\n")
     logfile.close()
 

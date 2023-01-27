@@ -1,6 +1,6 @@
 
-os.loadAPI("Axiom/libraries/setting")
---os.loadAPI("Axiom/libraries/encryption")
+os.loadAPI("Star_OS/libraries/setting")
+--os.loadAPI("Star_OS/libraries/encryption")
 local files = "home/"
 local hideFiles = true
 local previousDir = files
@@ -123,7 +123,7 @@ function filebrowser(startDir,select)
             edge.render(34,fy,34,fy,colors.white,colors.cyan,tostring(math.ceil(fs.getSize("/"..files..f_file[i])/1024)).."kb",colors.black)
             edge.render(40,fy,45,fy,colors.white,colors.cyan,"Text File",colors.green)
           elseif string.find(f_file[i],".log",string.len(f_file[i]) - 4) then
-            if files..f_file[i] == "Axiom/stacktrace.log" then
+            if files..f_file[i] == "Star_OS/stacktrace.log" then
               edge.render(20,fy,20,fy,colors.white,colors.cyan,"CRASH LOG",colors.red,false)
             end
             edge.render(2,fy,7,fy,colors.white,colors.cyan,f_file[i],colors.black,false)
@@ -210,7 +210,7 @@ function filebrowser(startDir,select)
       return true
     end
     if x >= 2 and x <= 5 and y == 3 then
-      edge.windowAlert(25,10,"App Version "..appversion.."\nOfficially packaged with Axiom.",true,colors.green)
+      edge.windowAlert(25,10,"App Version "..appversion.."\nOfficially packaged with Star_OS.",true,colors.green)
       --filebrowser()
     end
     if x >= 1 and x <= 4 and y == 1 and button == 1 then
@@ -245,7 +245,7 @@ function filebrowser(startDir,select)
           edge.render(1,3,10,3,menubarColor,colors.cyan,"Updated!",colors.green,false)
         end
         if x >= 1 and x <= 10 and y == 4 then
-          --next.newTask("Axiom/Programs > >/settings")
+          --next.newTask("Star_OS/Programs > >/settings")
           settings_new()
         end
         if x >= 1 and x <= 10 and y == 6 then

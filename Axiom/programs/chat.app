@@ -1,5 +1,5 @@
 local tArgs = {...}
-local username = axiom.getCurrentUser()
+local username = Star_OS.getCurrentUser()
 if tArgs[1] ~= nil and type(tArgs[1]) == "string" then
   username = tArgs[1]
 end

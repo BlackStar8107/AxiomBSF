@@ -71,7 +71,7 @@ function writesettings()
   local serial = tutils.serialise(vars)
 
   --print(serial)
-  local fh = fs.open("Axiom/settings.bak","w")
+  local fh = fs.open("Star_OS/settings.bak","w")
   fh.write(serial)
   fh.close()
 end
@@ -93,19 +93,19 @@ function addUser(username, pw, display,su)
   }
 end
 function deleteUser(username)
-  loadsettings("Axiom/settings.bak")
+  loadsettings("Star_OS/settings.bak")
   for k, v in pairs(variables.users) do
-    if k == username or v.displayName == username then 
+    if k == username or v.displayName == username then
       variables.users[k] = nil
       break
     end
   end
   writesettings()
 end
-if fs.exists("Axiom/settings.bak") then
-  loadsettings("Axiom/settings.bak")
-elseif fs.exists("Axiom/settings.bak") then
-  fs.copy("Axiom/settings.0","Axiom/settings.bak")
-  fs.delete("Axiom/settings.0")
-  loadsettings("Axiom/settings.bak")
+if fs.exists("Star_OS/settings.bak") then
+  loadsettings("Star_OS/settings.bak")
+elseif fs.exists("Star_OS/settings.bak") then
+  fs.copy("Star_OS/settings.0","Star_OS/settings.bak")
+  fs.delete("Star_OS/settings.0")
+  loadsettings("Star_OS/settings.bak")
 end
