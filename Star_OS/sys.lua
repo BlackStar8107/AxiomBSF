@@ -296,7 +296,7 @@ function checkForUpdates()
   --   return true
   -- end
   -- --#return false
-  retun false
+  return false
 end
 
 function keyStrokeHandler()
