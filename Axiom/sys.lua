@@ -161,7 +161,7 @@ local allfiles = { -- Protected files as well
   "Star_OS/sys.lua",
   "Star_OS/images/default.nfp",
   "Star_OS/images/AX.nfp",
-  "Star_OS/images/Star OS.nfp",
+  "Star_OS/images/Star_OS.nfp",
   "Star_OS/images/nature.nfp",
   "Star_OS/libraries/setting",
   "Star_OS/libraries/edge",
@@ -463,7 +463,7 @@ function execUpd(isTerminal)
   --return success, "Update system not finished for Community version. Use gitget to update."
   local out = true
   local success = true
-  shell.run("/.gitget "..setting.variables.update.user.." Star OS "..setting.variables.update.branch.." /")
+  shell.run("/.gitget "..setting.variables.update.user.." AxiomBSF "..setting.variables.update.branch.." /")
   return success, "Updated with gitget."
 end
 function login_clock()
