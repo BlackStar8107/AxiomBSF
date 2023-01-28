@@ -68,16 +68,16 @@ local function formatFS()
   local function mkdir(dir)
     if not fs.exists(dir) then fs.makeDir(dir) end
   end
-  if fs.exists("AxiomUI") then
-    for k, v in pairs(fs.list("AxiomUI")) do
+  if fs.exists("Star_UI") then
+    for k, v in pairs(fs.list("Star_UI")) do
       if not fs.exists(v) then
-        fs.move("AxiomUI/"..v, v)
-        print("AxiomUI/"..v.." -> "..v)
+        fs.move("Star_UI/"..v, v)
+        print("Star_UI/"..v.." -> "..v)
       else
-        print("AxiomUI/"..v.." -x>")
+        print("Star_UI/"..v.." -x>")
       end
     end
-    fs.delete("AxiomUI")
+    fs.delete("Star_UI")
     -- Ask for user confirmation unless specified
     if not delete_files then
       print("Press and hold Y to delete unused files. Press and hold any other key to exit")
@@ -137,7 +137,7 @@ local version = os.version()
 if version == "CraftOS 1.5" then
   error("Star OS is not compatible with "..version.."!")
 end
-print("AxiomUI Github Superfast(tm) Installer")
+print("Star_UI Github Superfast(tm) Installer")
 if not skip_branch_select then
   print("Select a branch:")
 
@@ -171,7 +171,7 @@ if not skip_branch_select then
   end
 end
 wget("http://www.pastebin.com/raw/W5ZkVYSi",".gitget")
-shell.run(".gitget "..user.." Axiom "..branch.." AxiomUI")
+shell.run(".gitget ".."BlackStar8107".." AxiomBSF "..branch.." Star_UI")
 formatFS()
 print("Installation completed.")
 if reboot then os.reboot() end
