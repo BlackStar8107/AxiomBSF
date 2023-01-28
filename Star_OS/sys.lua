@@ -288,6 +288,7 @@ function errorHandler(err)
 end
 
 function checkForUpdates()
+  return false
   -- local result = http.get("http://nothy.se/Star OS/latest")
   -- _G.latestversion = result.readAll()
   -- if _G.latestversion ~= nil and _G.latestversion == version then
@@ -296,7 +297,6 @@ function checkForUpdates()
   --   return true
   -- end
   -- --#return false
-  return false
 end
 
 function keyStrokeHandler()
